@@ -45,25 +45,24 @@ const StartPage = styled.div`
 
 function App(props) {
 
-
   const [data,setData] = useState({})
   const [location, setLocation] = useState('')
   const [color,setlazyColor] = useState('')
   const [image,setImages] = useState(backgroundImage)
   const [history,setHistory] = useState([]);
   const [historyImg,setHistoryImg] = useState([]);
-
+  
+  const FREEWEATHER_API_KEY = process.env.REACT_APP_FREEWEATHER_API_KEY;
+  const PEXEL_API_KEY = process.env.REACT_APP_PEXEL_API_KEY;
 
   const weatherUrl = `
-  https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=b00d6520bef052f43a8b1e6d5528ce09
+  https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${FREEWEATHER_API_KEY}
   `
 
   const fetchImages = async (keyword) => {
     try {
       // Pexels API 호출 URL
       const url = "https://api.pexels.com/v1/search";
-      // Pexels API 키
-      const api_key = "NP9vZQi2BOhCS5kJVn4F6ptQR4ncSEYidydV7LKW4s2jo5Qt5vlNkpK2";
       console.log(keyword);
       // Pexels API 호출 매개변수
       const params = {
@@ -76,7 +75,7 @@ function App(props) {
       const response = await axios.get(url, {
         params,
         headers: {
-          Authorization: api_key
+          Authorization: PEXEL_API_KEY,
         }
       });
       // Pexels API 응답 데이터 파싱
@@ -139,6 +138,7 @@ function App(props) {
           </p>
         </StartPage>
       }
+      {data.name !== undefined &&
       <div className="container">
         <div className="top">
           <div className="location">
@@ -151,7 +151,6 @@ function App(props) {
             {data.weather ? <p>{data.weather[0].main}</p>: null}
           </div>
         </div>
-        {data.name !== undefined &&
           <div>
             <div className="bottom">
               <div className="feels">
@@ -193,8 +192,8 @@ function App(props) {
                 </div>
             </div>
           </div>
-         }
       </div>
+      }
     </Hello>
   );
 }
