@@ -30,6 +30,11 @@ const HidtoryItme = styled.div`
     top: 0;
     z-index: 0;
   }
+  &:hover{
+    &:before{
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
 `
 
 const StartPage = styled.div`
@@ -79,16 +84,13 @@ function App(props) {
         }
       });
       // Pexels API 응답 데이터 파싱
-      const randomIndex = Math.floor(Math.random() * 5);
       const data = response.data.photos[0];
-      
-      setImages(data.src.small);
 
       // 검색 결과 이미지 URL 추출
 
       setImages(data.src.original);
-      setHistoryImg(  historyImg => [...historyImg, data.src.small ])
-      console.log(historyImg);
+      setHistoryImg(  historyImg => [...historyImg, data.src ])
+      // console.log(historyImg);
       
 
     } catch (error) {
@@ -110,13 +112,27 @@ function App(props) {
         });
 
         setHistory([...history, response.data]);
-        history.map((val)=>{
-          console.log(val.name)
-        })
       })
       setLocation('')
-
     }
+  }
+
+  
+
+  const backToHistory = (targetData,key)=>{
+    setHistory([...history,history[key]]);
+    console.log("setdata:"+targetData.name);
+    console.log("sethistory:"+data.name);
+    console.log(history);
+    setData(targetData);
+    setHistoryImg( historyImg => [...historyImg, historyImg[key] ])
+    setImages(historyImg[key].original);
+
+    // console.log(key);
+    // console.log(targetData);
+    // console.log(historyImg[key]);
+    // console.log(historyImg);
+    // 
   }
 
   // useEffect(()=>{
@@ -171,7 +187,7 @@ function App(props) {
               <div className="history-wrapper">
                 {history.map( function(value,key){
                   if(key !== history.length -1){
-                    const result = <HidtoryItme historyImg={historyImg[key]} key={key}>
+                    const result = <HidtoryItme historyImg={historyImg[key].small} key={key} onClick={() => backToHistory(value,key)}>
                         <div>
                           <p>
                             {value.name}
