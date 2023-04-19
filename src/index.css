@@ -100,6 +100,52 @@ h1{
   background-color: rgba(255,255,255,0.2)
 }
 
+.app .history{
+  position: absolute;
+  right: -150px;
+  top: 0;
+  height: 659px;
+  overflow-y: scroll;
+}
+
+.app .history-wrapper{
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column-reverse;
+  /* height: 150px; */
+  gap: 12px;
+}
+
+
+.app .history-wrapper > div{
+  min-width: 150px;
+  height: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.app .history-wrapper > div > div{
+  position: relative;
+  z-index: 2;
+  color: #cecece;
+}
+.app .history-wrapper > div > div:nth-child(1) p{
+  font-size: 1rem;
+}
+.app .history-wrapper > div > div:nth-child(1) p:last-child{
+  font-size: 1.4rem;
+  line-height: 1.5;
+}
+
+.app .history-wrapper > div > div:nth-child(2) p{
+  text-align: right;
+  font-size: 1rem;
+}
+
 .bold{
   font-weight: 700;
 }
