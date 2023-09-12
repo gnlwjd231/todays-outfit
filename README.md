@@ -1,4 +1,4 @@
-![Uploading image.png…]()
+<img width="1351" alt="image" src="https://github.com/gnlwjd231/todaysoutfit/assets/69576473/b7f01636-5e21-4ff1-b79a-79abadec5b3c">
 
 
 # Getting Started with Create React App
